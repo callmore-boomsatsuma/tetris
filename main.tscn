@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://nawetuxdkpuw"]
+
+[ext_resource type="Script" uid="uid://dj0dx4c2khyd5" path="res://scripts/board_visual.gd" id="1_1bvp3"]
+[ext_resource type="Resource" uid="uid://dou3usrrb6ray" path="res://resources/pieces/piece_t.tres" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cd6s2t81vxg6a" path="res://scripts/piece_board_visual.gd" id="2_lquwl"]
+[ext_resource type="Script" uid="uid://bsn8vy0hlvlu1" path="res://scripts/board.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://dgl84wruclng6" path="res://scripts/game_manager.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://fbd1oiqb662y" path="res://scripts/resources/piece_info.gd" id="6_ycdy4"]
+[ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="7_w48qg"]
+[ext_resource type="Resource" uid="uid://7n4hpa1xb2o3" path="res://resources/pieces/piece_j.tres" id="8_vivmo"]
+[ext_resource type="Resource" uid="uid://b35ang77qnwmd" path="res://resources/pieces/piece_l.tres" id="9_2cqfq"]
+[ext_resource type="Resource" uid="uid://bf66c6k7iq3g0" path="res://resources/pieces/piece_o.tres" id="10_yaehf"]
+[ext_resource type="Resource" uid="uid://ce5yq17w2gbsd" path="res://resources/pieces/piece_s.tres" id="11_074og"]
+[ext_resource type="Resource" uid="uid://d0wdld5al1iir" path="res://resources/pieces/piece_z.tres" id="12_cegan"]
+[ext_resource type="Script" uid="uid://bq2digypu3prn" path="res://scripts/resources/bag_randomiser.gd" id="13_82xsv"]
+[ext_resource type="PackedScene" uid="uid://bpqa1lyedoixq" path="res://scenes/next_queue/next_queue.tscn" id="14_w48qg"]
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+colors = PackedColorArray(0.76, 0.73263997, 0.55480003, 1, 0.67, 0.6162883, 0.4221, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7mycd"]
+gradient = SubResource("Gradient_lquwl")
+height = 128
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_272bh"]
+texture = SubResource("GradientTexture2D_7mycd")
+
+[sub_resource type="Gradient" id="Gradient_7mycd"]
+colors = PackedColorArray(0.07450981, 0.06666667, 0.2784314, 1, 0.15686275, 0.23921569, 0.36078432, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_272bh"]
+gradient = SubResource("Gradient_7mycd")
+height = 128
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5vw27"]
+texture = SubResource("GradientTexture2D_272bh")
+
+[sub_resource type="Resource" id="Resource_ycdy4"]
+script = ExtResource("13_82xsv")
+pieces = Array[ExtResource("6_ycdy4")]([ExtResource("7_w48qg"), ExtResource("8_vivmo"), ExtResource("9_2cqfq"), ExtResource("10_yaehf"), ExtResource("11_074og"), ExtResource("2_0xm2m"), ExtResource("12_cegan")])
+metadata/_custom_type_script = "uid://bq2digypu3prn"
+
+[node name="Node2D" type="Node2D" unique_id=773538261]
+
+[node name="Node2D" type="Node2D" parent="." unique_id=846927332]
+position = Vector2(465, 86)
+
+[node name="PanelOutside" type="Panel" parent="Node2D" unique_id=16395629]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 232.0
+offset_bottom = 472.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_272bh")
+
+[node name="PanelInside" type="Panel" parent="Node2D" unique_id=1834039081]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 228.0
+offset_bottom = 468.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5vw27")
+
+[node name="BoardVisual" type="Node2D" parent="Node2D" unique_id=898098228]
+script = ExtResource("1_1bvp3")
+cell_size = Vector2(24, 24)
+
+[node name="GhostPieceVisual" type="Node2D" parent="Node2D/BoardVisual" unique_id=1738967395]
+modulate = Color(0.88044363, 0.88044363, 0.88044363, 0.5411765)
+script = ExtResource("2_lquwl")
+cell_size = Vector2(24, 24)
+
+[node name="PieceVisual" type="Node2D" parent="Node2D/BoardVisual" unique_id=630286922]
+script = ExtResource("2_lquwl")
+piece = ExtResource("2_0xm2m")
+cell_size = Vector2(24, 24)
+
+[node name="Board" type="Node" parent="." unique_id=522746979]
+script = ExtResource("3_h2yge")
+
+[node name="GameManager" type="Node" parent="." unique_id=509501835 node_paths=PackedStringArray("board")]
+script = ExtResource("5_lquwl")
+board = NodePath("../Board")
+piece_randomiser = SubResource("Resource_ycdy4")
+
+[node name="Node2D2" type="Control" parent="." unique_id=395666005]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 780.0
+offset_top = 106.0
+offset_right = 780.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="NextQueue" parent="Node2D2" unique_id=1369596700 instance=ExtResource("14_w48qg")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="cell_changed" from="Board" to="Node2D/BoardVisual" method="_on_board_cell_changed"]
+[connection signal="cell_cleared" from="Board" to="Node2D/BoardVisual" method="_on_board_cell_cleared"]
+[connection signal="ghost_piece_locked" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_locked"]
+[connection signal="ghost_piece_moved" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_moved"]
+[connection signal="ghost_piece_rotated" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_rotated"]
+[connection signal="ghost_piece_spawned" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_spawned"]
+[connection signal="piece_locked" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_locked"]
+[connection signal="piece_moved" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_moved"]
+[connection signal="piece_rotated" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_rotated"]
+[connection signal="piece_spawned" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_spawned"]
+[connection signal="update_next_queue" from="GameManager" to="Node2D2/NextQueue" method="_on_update_next_queue"]

@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://devvyuch18gqo"]
+
+[ext_resource type="Script" uid="uid://cuhgxhatlmxgs" path="res://scripts/piece_visual.gd" id="1_0j6ax"]
+[ext_resource type="Resource" uid="uid://dou3usrrb6ray" path="res://resources/pieces/piece_t.tres" id="2_joqeh"]
+[ext_resource type="Resource" uid="uid://ce5yq17w2gbsd" path="res://resources/pieces/piece_s.tres" id="3_joqeh"]
+[ext_resource type="Resource" uid="uid://d0wdld5al1iir" path="res://resources/pieces/piece_z.tres" id="4_fbkkq"]
+[ext_resource type="Resource" uid="uid://7n4hpa1xb2o3" path="res://resources/pieces/piece_j.tres" id="5_kmtts"]
+[ext_resource type="Resource" uid="uid://b35ang77qnwmd" path="res://resources/pieces/piece_l.tres" id="6_4ln4q"]
+[ext_resource type="Resource" uid="uid://bf66c6k7iq3g0" path="res://resources/pieces/piece_o.tres" id="7_nqssg"]
+[ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="8_ivgqf"]
+[ext_resource type="Script" uid="uid://bc8e1lhsrhneu" path="res://scripts/piece_icon_visual.gd" id="9_nqssg"]
+[ext_resource type="PackedScene" uid="uid://cden844qf5gro" path="res://scenes/next_queue/next_queue_entry.tscn" id="10_ivgqf"]
+
+[node name="Node2D" type="Node2D" unique_id=1685471267]
+
+[node name="PieceT" type="Node2D" parent="." unique_id=2085801623]
+position = Vector2(322, 66)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("2_joqeh")
+
+[node name="PieceS" type="Node2D" parent="." unique_id=1072657053]
+position = Vector2(191, 208)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("3_joqeh")
+
+[node name="PieceZ" type="Node2D" parent="." unique_id=837081676]
+position = Vector2(627, 126)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("4_fbkkq")
+
+[node name="PieceJ" type="Node2D" parent="." unique_id=1326961612]
+position = Vector2(469, 344)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("5_kmtts")
+
+[node name="PieceL" type="Node2D" parent="." unique_id=914021851]
+position = Vector2(258, 306)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("6_4ln4q")
+
+[node name="PieceO" type="Node2D" parent="." unique_id=1543472439]
+position = Vector2(538, 202)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("7_nqssg")
+
+[node name="PieceI" type="Node2D" parent="." unique_id=1267317368]
+position = Vector2(398, 154)
+script = ExtResource("1_0j6ax")
+piece = ExtResource("8_ivgqf")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1668378436]
+position = Vector2(183, 389)
+script = ExtResource("9_nqssg")
+piece = ExtResource("7_nqssg")
+
+[node name="NextQueueEntry" parent="." unique_id=847700633 instance=ExtResource("10_ivgqf")]
+offset_left = 757.0
+offset_top = 62.0
+offset_right = 853.0
+offset_bottom = 110.0
+displayed_piece = ExtResource("8_ivgqf")
+
+[node name="NextQueueEntry2" parent="." unique_id=1830335312 instance=ExtResource("10_ivgqf")]
+offset_left = 702.0
+offset_top = 178.0
+offset_right = 798.0
+offset_bottom = 226.0
+displayed_piece = ExtResource("5_kmtts")
+
+[node name="NextQueueEntry3" parent="." unique_id=1345960811 instance=ExtResource("10_ivgqf")]
+offset_left = 811.0
+offset_top = 179.0
+offset_right = 907.0
+offset_bottom = 227.0
+displayed_piece = ExtResource("6_4ln4q")
+
+[node name="NextQueueEntry4" parent="." unique_id=2002349218 instance=ExtResource("10_ivgqf")]
+offset_left = 813.0
+offset_top = 121.0
+offset_right = 909.0
+offset_bottom = 169.0
+displayed_piece = ExtResource("7_nqssg")
+
+[node name="NextQueueEntry5" parent="." unique_id=131364098 instance=ExtResource("10_ivgqf")]
+offset_left = 701.0
+offset_top = 237.0
+offset_right = 797.0
+offset_bottom = 285.0
+displayed_piece = ExtResource("3_joqeh")
+
+[node name="NextQueueEntry6" parent="." unique_id=1111153892 instance=ExtResource("10_ivgqf")]
+offset_left = 702.0
+offset_top = 120.0
+offset_right = 798.0
+offset_bottom = 168.0
+displayed_piece = ExtResource("2_joqeh")
+
+[node name="NextQueueEntry7" parent="." unique_id=409898345 instance=ExtResource("10_ivgqf")]
+offset_left = 812.0
+offset_top = 239.0
+offset_right = 908.0
+offset_bottom = 287.0
+displayed_piece = ExtResource("4_fbkkq")
