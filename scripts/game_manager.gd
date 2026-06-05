@@ -19,6 +19,8 @@ var active_piece := piece_set[0]
 
 @export var piece_randomiser: PieceRandomiser
 
+var held_piece: PieceInfo = null
+
 var piece_entry_delay := 0.0
 var piece_fall_delay := 0.0
 var piece_lock_delay := 0.0
@@ -46,7 +48,7 @@ signal ghost_piece_spawned(position: Vector2i, piece: PieceInfo)
 signal update_next_queue(next_queue: Array[PieceInfo])
 
 func _ready():
-	init_piece()
+	spawn_piece()
 
 	piece_moved.connect(_on_piece_moved)
 	piece_rotated.connect(_on_piece_rotated)
@@ -65,19 +67,23 @@ func _physics_process(delta: float) -> void:
 		input_queue_soft_drop = false
 		handle_input_auto_repeat_charging()
 		return
+	
+	if input_queue_hold:
+		if held_piece == null:
+			held_piece = active_piece
+			spawn_piece()
+		else:
+			var temp = active_piece
+			active_piece = held_piece
+			held_piece = temp
+			init_piece()
+		print("hold")
+		
+		input_queue_hold = false
 
-	# if Input.is_action_just_pressed("move_left"):
-	# 	handle_horizontal_movement_input(Vector2.LEFT)
-	# elif Input.is_action_just_pressed("move_right"):
-	# 	handle_horizontal_movement_input(Vector2.RIGHT)
 	if input_queue_movement:
 		handle_horizontal_movement_input(input_queue_movement_vector)
 		input_queue_movement = false
-
-	# if Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right") and piece_last_moved_direction == Vector2i.LEFT:
-	# 	handle_horizontal_movement_input(Vector2.RIGHT)
-	# elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left") and piece_last_moved_direction == Vector2i.RIGHT:
-	# 	handle_horizontal_movement_input(Vector2.LEFT)
 
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		piece_auto_shift_delay -= delta
@@ -159,6 +165,11 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	
+	if event.is_action_pressed("hold"):
+		input_queue_hold = true
+		get_viewport().set_input_as_handled()
+		return
+	
 	assert(not get_viewport().is_input_handled(), "Input was handled but not returned early.")
 
 func handle_input_auto_repeat_charging() -> void:
@@ -176,8 +187,12 @@ func handle_horizontal_movement_input(movement: Vector2i) -> void:
 	piece_auto_shift_delay = 0.2
 
 
-func init_piece() -> void:
+func spawn_piece() -> void:
 	active_piece = get_next_piece()
+	init_piece()
+
+
+func init_piece() -> void:
 	controling_piece = true
 	force_warp_active_piece(Vector2i(4, 1))
 	set_piece_rotation(PieceInfo.RotationDirection.NORTH)
@@ -238,7 +253,7 @@ func lock_piece() -> void:
 	clear_lines()
 
 func piece_entry_delay_timeout() -> void:
-	init_piece()
+	spawn_piece()
 
 func reset_fall_delay() -> void:
 	piece_fall_delay = get_fall_delay()

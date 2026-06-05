@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dj0dx4c2khyd5" path="res://scripts/board_visual.gd" id="1_1bvp3"]
 [ext_resource type="Resource" uid="uid://dou3usrrb6ray" path="res://resources/pieces/piece_t.tres" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cd6s2t81vxg6a" path="res://scripts/piece_board_visual.gd" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cden844qf5gro" path="res://scenes/piece_display/piece_display.tscn" id="2_vivmo"]
 [ext_resource type="Script" uid="uid://bsn8vy0hlvlu1" path="res://scripts/board.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://dgl84wruclng6" path="res://scripts/game_manager.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://fbd1oiqb662y" path="res://scripts/resources/piece_info.gd" id="6_ycdy4"]
@@ -46,35 +47,40 @@ metadata/_custom_type_script = "uid://bq2digypu3prn"
 
 [node name="Node2D" type="Node2D" unique_id=773538261]
 
-[node name="GameHUD" type="Control" parent="." unique_id=395666005]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=725569917]
+
+[node name="GameHUD" type="Control" parent="CanvasLayer" unique_id=395666005]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="NextQueue" parent="GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
+[node name="NextQueue" parent="CanvasLayer/GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
 layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 890.0
-offset_top = 91.0
-offset_right = 890.0
-offset_bottom = 91.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = 723.0
+offset_top = 76.0
+offset_right = 819.0
+offset_bottom = 411.0
 
-[node name="Hold" type="Control" parent="GameHUD" unique_id=1618806918]
-anchors_preset = 0
-offset_left = 177.0
-offset_top = 113.0
-offset_right = 217.0
-offset_bottom = 153.0
+[node name="Hold" type="VBoxContainer" parent="CanvasLayer/GameHUD" unique_id=2085369979]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 70.0
+offset_right = 412.0
+offset_bottom = 145.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/GameHUD/Hold" unique_id=244448138]
+layout_mode = 2
+text = "Hold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PieceDisplay" parent="CanvasLayer/GameHUD/Hold" unique_id=847700633 instance=ExtResource("2_vivmo")]
+layout_mode = 2
 
 [node name="Node2D" type="Node2D" parent="." unique_id=846927332]
 position = Vector2(465, 86)
@@ -125,4 +131,4 @@ piece_randomiser = SubResource("Resource_ycdy4")
 [connection signal="piece_moved" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_moved"]
 [connection signal="piece_rotated" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_rotated"]
 [connection signal="piece_spawned" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_spawned"]
-[connection signal="update_next_queue" from="GameManager" to="GameHUD/NextQueue" method="_on_update_next_queue"]
+[connection signal="update_next_queue" from="GameManager" to="CanvasLayer/GameHUD/NextQueue" method="_on_update_next_queue"]
