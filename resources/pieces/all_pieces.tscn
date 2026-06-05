@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://bf66c6k7iq3g0" path="res://resources/pieces/piece_o.tres" id="7_nqssg"]
 [ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="8_ivgqf"]
 [ext_resource type="Script" uid="uid://bc8e1lhsrhneu" path="res://scripts/piece_icon_visual.gd" id="9_nqssg"]
-[ext_resource type="PackedScene" uid="uid://cden844qf5gro" path="res://scenes/next_queue/next_queue_entry.tscn" id="10_ivgqf"]
+[ext_resource type="PackedScene" uid="uid://cden844qf5gro" path="res://scenes/piece_display/piece_display.tscn" id="10_ivgqf"]
 
 [node name="Node2D" type="Node2D" unique_id=1685471267]
 

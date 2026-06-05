@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://cden844qf5gro"]
 
 [ext_resource type="Script" uid="uid://bc8e1lhsrhneu" path="res://scripts/piece_icon_visual.gd" id="1_5dh30"]
-[ext_resource type="Script" uid="uid://jqwcm7pmo4ji" path="res://scenes/next_queue/next_queue_entry.gd" id="1_r4qdi"]
+[ext_resource type="Script" uid="uid://jqwcm7pmo4ji" path="res://scenes/piece_display/piece_display.gd" id="1_r4qdi"]
 [ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="2_r4qdi"]
 
-[node name="NextQueueEntry" type="Panel" unique_id=847700633]
+[node name="PieceDisplay" type="Panel" unique_id=847700633]
 custom_minimum_size = Vector2(96, 48)
 offset_right = 96.0
 offset_bottom = 48.0
 script = ExtResource("1_r4qdi")
+displayed_piece = ExtResource("2_r4qdi")
 
 [node name="Centerer" type="Control" parent="." unique_id=988705895]
 layout_mode = 1

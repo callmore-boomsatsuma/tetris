@@ -85,28 +85,35 @@ script = ExtResource("5_lquwl")
 board = NodePath("../Board")
 piece_randomiser = SubResource("Resource_ycdy4")
 
-[node name="Node2D2" type="Control" parent="." unique_id=395666005]
+[node name="GameHUD" type="Control" parent="." unique_id=395666005]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 780.0
-offset_top = 106.0
-offset_right = 780.0
-offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="NextQueue" parent="Node2D2" unique_id=1369596700 instance=ExtResource("14_w48qg")]
+[node name="NextQueue" parent="GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_left = 890.0
+offset_top = 91.0
+offset_right = 890.0
+offset_bottom = 91.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Hold" type="Control" parent="GameHUD" unique_id=1618806918]
+anchors_preset = 0
+offset_left = 177.0
+offset_top = 113.0
+offset_right = 217.0
+offset_bottom = 153.0
 
 [connection signal="cell_changed" from="Board" to="Node2D/BoardVisual" method="_on_board_cell_changed"]
 [connection signal="cell_cleared" from="Board" to="Node2D/BoardVisual" method="_on_board_cell_cleared"]
@@ -118,4 +125,4 @@ grow_vertical = 1
 [connection signal="piece_moved" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_moved"]
 [connection signal="piece_rotated" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_rotated"]
 [connection signal="piece_spawned" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_spawned"]
-[connection signal="update_next_queue" from="GameManager" to="Node2D2/NextQueue" method="_on_update_next_queue"]
+[connection signal="update_next_queue" from="GameManager" to="GameHUD/NextQueue" method="_on_update_next_queue"]
