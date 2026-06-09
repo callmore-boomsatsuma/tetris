@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bhdqm0hdonifk"]
+
+[ext_resource type="PackedScene" uid="uid://cden844qf5gro" path="res://scenes/piece_display/piece_display.tscn" id="1_1jwub"]
+[ext_resource type="Script" uid="uid://dmabfkdr2pc7i" path="res://scenes/hold/hold.gd" id="1_w3vgp"]
+
+[node name="Hold" type="VBoxContainer" unique_id=145509640]
+offset_right = 96.0
+offset_bottom = 75.0
+script = ExtResource("1_w3vgp")
+
+[node name="Label" type="Label" parent="." unique_id=363447489]
+layout_mode = 2
+text = "Hold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PieceDisplay" parent="." unique_id=847700633 instance=ExtResource("1_1jwub")]
+unique_name_in_owner = true
+layout_mode = 2

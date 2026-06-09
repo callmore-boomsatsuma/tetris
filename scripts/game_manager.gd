@@ -46,6 +46,7 @@ signal ghost_piece_locked(position: Vector2i)
 signal ghost_piece_spawned(position: Vector2i, piece: PieceInfo)
 
 signal update_next_queue(next_queue: Array[PieceInfo])
+signal update_hold(held_piece: PieceInfo)
 
 func _ready():
 	spawn_piece()
@@ -77,7 +78,7 @@ func _physics_process(delta: float) -> void:
 			active_piece = held_piece
 			held_piece = temp
 			init_piece()
-		print("hold")
+		update_hold.emit(held_piece)
 		
 		input_queue_hold = false
 

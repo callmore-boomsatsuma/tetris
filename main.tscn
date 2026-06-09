@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dj0dx4c2khyd5" path="res://scripts/board_visual.gd" id="1_1bvp3"]
 [ext_resource type="Resource" uid="uid://dou3usrrb6ray" path="res://resources/pieces/piece_t.tres" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cd6s2t81vxg6a" path="res://scripts/piece_board_visual.gd" id="2_lquwl"]
-[ext_resource type="PackedScene" uid="uid://cden844qf5gro" path="res://scenes/piece_display/piece_display.tscn" id="2_vivmo"]
+[ext_resource type="PackedScene" uid="uid://bhdqm0hdonifk" path="res://scenes/hold/hold.tscn" id="2_vivmo"]
 [ext_resource type="Script" uid="uid://bsn8vy0hlvlu1" path="res://scripts/board.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://dgl84wruclng6" path="res://scripts/game_manager.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://fbd1oiqb662y" path="res://scripts/resources/piece_info.gd" id="6_ycdy4"]
@@ -49,66 +49,68 @@ metadata/_custom_type_script = "uid://bq2digypu3prn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=725569917]
 
-[node name="GameHUD" type="Control" parent="CanvasLayer" unique_id=395666005]
+[node name="GameHUD" type="HBoxContainer" parent="CanvasLayer" unique_id=149103624]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -167.5
+offset_right = 98.0
+offset_bottom = 167.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Hold" parent="CanvasLayer/GameHUD" unique_id=145509640 instance=ExtResource("2_vivmo")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="NextQueue" parent="CanvasLayer/GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="." unique_id=1658808472]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 249.0
+offset_bottom = 488.0
+
+[node name="PanelOutside" type="Panel" parent="Control" unique_id=16395629]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="NextQueue" parent="CanvasLayer/GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
-layout_mode = 1
-offset_left = 723.0
-offset_top = 76.0
-offset_right = 819.0
-offset_bottom = 411.0
-
-[node name="Hold" type="VBoxContainer" parent="CanvasLayer/GameHUD" unique_id=2085369979]
-layout_mode = 0
-offset_left = 316.0
-offset_top = 70.0
-offset_right = 412.0
-offset_bottom = 145.0
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="CanvasLayer/GameHUD/Hold" unique_id=244448138]
-layout_mode = 2
-text = "Hold"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PieceDisplay" parent="CanvasLayer/GameHUD/Hold" unique_id=847700633 instance=ExtResource("2_vivmo")]
-layout_mode = 2
-
-[node name="Node2D" type="Node2D" parent="." unique_id=846927332]
-position = Vector2(465, 86)
-
-[node name="PanelOutside" type="Panel" parent="Node2D" unique_id=16395629]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 232.0
-offset_bottom = 472.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_272bh")
 
-[node name="PanelInside" type="Panel" parent="Node2D" unique_id=1834039081]
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 228.0
-offset_bottom = 468.0
+[node name="PanelInside" type="Panel" parent="Control" unique_id=1834039081]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5vw27")
 
-[node name="BoardVisual" type="Node2D" parent="Node2D" unique_id=898098228]
+[node name="BoardVisual" type="Node2D" parent="Control" unique_id=898098228]
+position = Vector2(16, 16)
 script = ExtResource("1_1bvp3")
 cell_size = Vector2(24, 24)
+metadata/_edit_group_ = true
 
-[node name="GhostPieceVisual" type="Node2D" parent="Node2D/BoardVisual" unique_id=1738967395]
+[node name="GhostPieceVisual" type="Node2D" parent="Control/BoardVisual" unique_id=1738967395]
 modulate = Color(0.88044363, 0.88044363, 0.88044363, 0.5411765)
 script = ExtResource("2_lquwl")
 cell_size = Vector2(24, 24)
 
-[node name="PieceVisual" type="Node2D" parent="Node2D/BoardVisual" unique_id=630286922]
+[node name="PieceVisual" type="Node2D" parent="Control/BoardVisual" unique_id=630286922]
+position = Vector2(106, 43)
 script = ExtResource("2_lquwl")
 piece = ExtResource("2_0xm2m")
 cell_size = Vector2(24, 24)
@@ -121,14 +123,15 @@ script = ExtResource("5_lquwl")
 board = NodePath("../Board")
 piece_randomiser = SubResource("Resource_ycdy4")
 
-[connection signal="cell_changed" from="Board" to="Node2D/BoardVisual" method="_on_board_cell_changed"]
-[connection signal="cell_cleared" from="Board" to="Node2D/BoardVisual" method="_on_board_cell_cleared"]
-[connection signal="ghost_piece_locked" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_locked"]
-[connection signal="ghost_piece_moved" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_moved"]
-[connection signal="ghost_piece_rotated" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_rotated"]
-[connection signal="ghost_piece_spawned" from="GameManager" to="Node2D/BoardVisual/GhostPieceVisual" method="_on_piece_spawned"]
-[connection signal="piece_locked" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_locked"]
-[connection signal="piece_moved" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_moved"]
-[connection signal="piece_rotated" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_rotated"]
-[connection signal="piece_spawned" from="GameManager" to="Node2D/BoardVisual/PieceVisual" method="_on_piece_spawned"]
+[connection signal="cell_changed" from="Board" to="Control/BoardVisual" method="_on_board_cell_changed"]
+[connection signal="cell_cleared" from="Board" to="Control/BoardVisual" method="_on_board_cell_cleared"]
+[connection signal="ghost_piece_locked" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_locked"]
+[connection signal="ghost_piece_moved" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_moved"]
+[connection signal="ghost_piece_rotated" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_rotated"]
+[connection signal="ghost_piece_spawned" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_spawned"]
+[connection signal="piece_locked" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_locked"]
+[connection signal="piece_moved" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_moved"]
+[connection signal="piece_rotated" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_rotated"]
+[connection signal="piece_spawned" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_spawned"]
+[connection signal="update_hold" from="GameManager" to="CanvasLayer/GameHUD/Hold" method="_on_hold_updated"]
 [connection signal="update_next_queue" from="GameManager" to="CanvasLayer/GameHUD/NextQueue" method="_on_update_next_queue"]
