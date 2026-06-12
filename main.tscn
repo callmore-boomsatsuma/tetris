@@ -1,10 +1,11 @@
-[gd_scene format=3 uid="uid://nawetuxdkpuw"]
+[gd_scene format=4 uid="uid://nawetuxdkpuw"]
 
 [ext_resource type="Script" uid="uid://dj0dx4c2khyd5" path="res://scripts/board_visual.gd" id="1_1bvp3"]
 [ext_resource type="Resource" uid="uid://dou3usrrb6ray" path="res://resources/pieces/piece_t.tres" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cd6s2t81vxg6a" path="res://scripts/piece_board_visual.gd" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bhdqm0hdonifk" path="res://scenes/hold/hold.tscn" id="2_vivmo"]
 [ext_resource type="Script" uid="uid://bsn8vy0hlvlu1" path="res://scripts/board.gd" id="3_h2yge"]
+[ext_resource type="SpriteFrames" uid="uid://bkk8m6yfbq4qy" path="res://resources/images/tetromino-tiles-x24-sprite-frames.tres" id="4_yaehf"]
 [ext_resource type="Script" uid="uid://dgl84wruclng6" path="res://scripts/game_manager.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://fbd1oiqb662y" path="res://scripts/resources/piece_info.gd" id="6_ycdy4"]
 [ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="7_w48qg"]
@@ -15,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://d0wdld5al1iir" path="res://resources/pieces/piece_z.tres" id="12_cegan"]
 [ext_resource type="Script" uid="uid://bq2digypu3prn" path="res://scripts/resources/bag_randomiser.gd" id="13_82xsv"]
 [ext_resource type="PackedScene" uid="uid://bpqa1lyedoixq" path="res://scenes/next_queue/next_queue.tscn" id="14_w48qg"]
+[ext_resource type="TileSet" uid="uid://b32ugretshyb7" path="res://resources/images/tetromino-tiles-x24-tile-set.tres" id="16_2cqfq"]
 
 [sub_resource type="Gradient" id="Gradient_lquwl"]
 colors = PackedColorArray(0.76, 0.73263997, 0.55480003, 1, 0.67, 0.6162883, 0.4221, 1)
@@ -40,6 +42,13 @@ fill_to = Vector2(0, 0)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5vw27"]
 texture = SubResource("GradientTexture2D_272bh")
 
+[sub_resource type="LabelSettings" id="LabelSettings_2cqfq"]
+line_spacing = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_vivmo"]
+line_spacing = 0.0
+font_size = 32
+
 [sub_resource type="Resource" id="Resource_ycdy4"]
 script = ExtResource("13_82xsv")
 pieces = Array[ExtResource("6_ycdy4")]([ExtResource("7_w48qg"), ExtResource("8_vivmo"), ExtResource("9_2cqfq"), ExtResource("10_yaehf"), ExtResource("11_074og"), ExtResource("2_0xm2m"), ExtResource("12_cegan")])
@@ -49,71 +58,150 @@ metadata/_custom_type_script = "uid://bq2digypu3prn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=725569917]
 
-[node name="GameHUD" type="HBoxContainer" parent="CanvasLayer" unique_id=149103624]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=2130479942]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.0
-offset_top = -167.5
-offset_right = 98.0
-offset_bottom = 167.5
+offset_left = -224.0
+offset_top = -244.0
+offset_right = 224.0
+offset_bottom = 244.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
 
-[node name="Hold" parent="CanvasLayer/GameHUD" unique_id=145509640 instance=ExtResource("2_vivmo")]
+[node name="GameHUD" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=149103624]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Hold" parent="CanvasLayer/VBoxContainer/GameHUD" unique_id=145509640 instance=ExtResource("2_vivmo")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="NextQueue" parent="CanvasLayer/GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
+[node name="Board" type="CenterContainer" parent="CanvasLayer/VBoxContainer/GameHUD" unique_id=1784411745]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="ContainerOutside" type="MarginContainer" parent="CanvasLayer/VBoxContainer/GameHUD/Board" unique_id=1970643327]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="." unique_id=1658808472]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 249.0
-offset_bottom = 488.0
-
-[node name="PanelOutside" type="Panel" parent="Control" unique_id=16395629]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PanelOutside" type="Panel" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside" unique_id=16395629]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_272bh")
 
-[node name="PanelInside" type="Panel" parent="Control" unique_id=1834039081]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ContainerInside" type="MarginContainer" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside" unique_id=232209285]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelInside" type="Panel" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside" unique_id=1834039081]
+custom_minimum_size = Vector2(240, 480)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5vw27")
 
-[node name="BoardVisual" type="Node2D" parent="Control" unique_id=898098228]
-position = Vector2(16, 16)
+[node name="BoardVisual" type="Node2D" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside" unique_id=898098228]
+position = Vector2(12, 12)
 script = ExtResource("1_1bvp3")
+sprite_frames = ExtResource("4_yaehf")
 cell_size = Vector2(24, 24)
 metadata/_edit_group_ = true
 
-[node name="GhostPieceVisual" type="Node2D" parent="Control/BoardVisual" unique_id=1738967395]
+[node name="GhostPieceVisual" type="Node2D" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" unique_id=1738967395]
 modulate = Color(0.88044363, 0.88044363, 0.88044363, 0.5411765)
 script = ExtResource("2_lquwl")
 cell_size = Vector2(24, 24)
 
-[node name="PieceVisual" type="Node2D" parent="Control/BoardVisual" unique_id=630286922]
+[node name="PieceVisual" type="Node2D" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" unique_id=630286922]
 position = Vector2(106, 43)
 script = ExtResource("2_lquwl")
+sprite_frames = ExtResource("4_yaehf")
 piece = ExtResource("2_0xm2m")
 cell_size = Vector2(24, 24)
+
+[node name="NextQueue" parent="CanvasLayer/VBoxContainer/GameHUD" unique_id=1369596700 instance=ExtResource("14_w48qg")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1998520839]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Lines" type="CenterContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=645577479]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Lines" unique_id=180182029]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/Lines/VBoxContainer" unique_id=1157611168]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Lines"
+label_settings = SubResource("LabelSettings_2cqfq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Readout" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/Lines/VBoxContainer" unique_id=1488783870]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "123"
+label_settings = SubResource("LabelSettings_vivmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="CenterContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=546079430]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Score" unique_id=1149130464]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/Score/VBoxContainer" unique_id=1294211559]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Score"
+label_settings = SubResource("LabelSettings_2cqfq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Readout" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/Score/VBoxContainer" unique_id=1689246765]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "12,345,670"
+label_settings = SubResource("LabelSettings_vivmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level" type="CenterContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=1124413333]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Level" unique_id=1190960021]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/Level/VBoxContainer" unique_id=2023864114]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level"
+label_settings = SubResource("LabelSettings_2cqfq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Readout" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/Level/VBoxContainer" unique_id=2045301575]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "01"
+label_settings = SubResource("LabelSettings_vivmo")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Board" type="Node" parent="." unique_id=522746979]
 script = ExtResource("3_h2yge")
@@ -123,15 +211,19 @@ script = ExtResource("5_lquwl")
 board = NodePath("../Board")
 piece_randomiser = SubResource("Resource_ycdy4")
 
-[connection signal="cell_changed" from="Board" to="Control/BoardVisual" method="_on_board_cell_changed"]
-[connection signal="cell_cleared" from="Board" to="Control/BoardVisual" method="_on_board_cell_cleared"]
-[connection signal="ghost_piece_locked" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_locked"]
-[connection signal="ghost_piece_moved" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_moved"]
-[connection signal="ghost_piece_rotated" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_rotated"]
-[connection signal="ghost_piece_spawned" from="GameManager" to="Control/BoardVisual/GhostPieceVisual" method="_on_piece_spawned"]
-[connection signal="piece_locked" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_locked"]
-[connection signal="piece_moved" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_moved"]
-[connection signal="piece_rotated" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_rotated"]
-[connection signal="piece_spawned" from="GameManager" to="Control/BoardVisual/PieceVisual" method="_on_piece_spawned"]
-[connection signal="update_hold" from="GameManager" to="CanvasLayer/GameHUD/Hold" method="_on_hold_updated"]
-[connection signal="update_next_queue" from="GameManager" to="CanvasLayer/GameHUD/NextQueue" method="_on_update_next_queue"]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=831217865]
+tile_map_data = PackedByteArray("AAAFAAsAAAABAAAAAAAFAAoAAAABAAEAAAAFAAkAAAACAAEAAAAGAAkAAAAAAAIAAAAIAAsAAAAAAAMAAAAHAAsAAAACAAEAAAAHAAwAAAADAAAAAAAIAAwAAAABAAIAAAAKAAoAAAACAAAAAAALAAoAAAAAAAMAAAALAAsAAAABAAEAAAALAAwAAAABAAAAAAAHAA4AAAAAAAIAAAAGAA4AAAACAAEAAAAGAA8AAAABAAIAAAAFAA8AAAACAAAAAAAJAA4AAAACAAAAAAAKAA4AAAAAAAMAAAAKAA8AAAADAAAAAAALAA8AAAAAAAIAAAAIABAAAAAAAAEAAAAIABEAAAADAAIAAAAHABEAAAACAAAAAAAJABEAAAAAAAIAAAAGABMAAAACAAAAAAAHABMAAAACAAIAAAAIABMAAAACAAIAAAAJABMAAAAAAAIAAAA=")
+tile_set = ExtResource("16_2cqfq")
+
+[connection signal="cell_changed" from="Board" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" method="_on_board_cell_changed"]
+[connection signal="cell_cleared" from="Board" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" method="_on_board_cell_cleared"]
+[connection signal="ghost_piece_locked" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_locked"]
+[connection signal="ghost_piece_moved" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_moved"]
+[connection signal="ghost_piece_rotated" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_rotated"]
+[connection signal="ghost_piece_spawned" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_spawned"]
+[connection signal="piece_locked" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_locked"]
+[connection signal="piece_moved" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_moved"]
+[connection signal="piece_rotated" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_rotated"]
+[connection signal="piece_spawned" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_spawned"]
+[connection signal="update_hold" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Hold" method="_on_hold_updated"]
+[connection signal="update_next_queue" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/NextQueue" method="_on_update_next_queue"]

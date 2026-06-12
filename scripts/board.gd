@@ -7,6 +7,12 @@ var cells: Dictionary[Vector2i, CellData] = {}
 @export var size := Vector2i(10, 20)
 
 @export_tool_button("Randomise board") var randomise_board_action = random_generate_board
+const rand_colors: Array[Color] = [
+    Color.RED,
+    Color.BLUE,
+    Color.YELLOW,
+    Color.GREEN,
+]
 
 signal cell_changed(loc: Vector2i, data: CellData)
 signal cell_cleared(loc: Vector2i)
@@ -18,7 +24,7 @@ func random_generate_board() -> void:
     for y in range(size.y):
         for x in range(size.x):
             if randf() >= 0.75:
-                set_cell(Vector2i(x, y), CellData.new())
+                set_cell(Vector2i(x, y), CellData.new(rand_colors.pick_random(), randi_range(0, 15)))
 
 func set_cell(loc: Vector2i, data: CellData) -> void:
     cells[loc] = data

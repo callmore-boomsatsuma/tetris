@@ -2,6 +2,8 @@
 class_name BoardVisual
 extends Node2D
 
+@export var sprite_frames: SpriteFrames
+
 var cells: Dictionary[Vector2i, CellData] = {}
 @export var cell_size := Vector2.ONE * 16:
     set(value):
@@ -12,7 +14,17 @@ func _draw() -> void:
     draw_set_transform(-cell_size / 2, 0, cell_size)
     for loc in cells:
         var data := cells[loc]
-        draw_rect(Rect2(loc, Vector2.ONE), data.color)
+        if sprite_frames:
+            draw_tile(loc, data)
+        else:
+            draw_tile_solid(loc, data)
+
+func draw_tile(location: Vector2i, data: CellData) -> void:
+    assert(sprite_frames != null)
+    draw_texture_rect(sprite_frames.get_frame_texture("red", data.connections), Rect2(location, Vector2.ONE), false, data.color)
+
+func draw_tile_solid(location: Vector2i, data: CellData) -> void:
+    draw_rect(Rect2(location, Vector2.ONE), data.color)
 
 
 func _on_board_cell_changed(loc: Vector2i, data: CellData) -> void:

@@ -1,6 +1,9 @@
 @tool
 extends Node2D
 
+@export var sprite_frames: SpriteFrames
+@export var tile_set: TileSet
+
 @export var piece: PieceInfo:
 	get:
 		return piece
