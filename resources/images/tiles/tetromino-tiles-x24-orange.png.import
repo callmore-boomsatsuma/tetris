@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqwuhf5ng7tmq"
-path="res://.godot/imported/tetromino-tiles-x24.png-844a85b20dee71eeb0cd8d0e0a25e38c.ctex"
+uid="uid://1bugfmtjwkf2"
+path="res://.godot/imported/tetromino-tiles-x24-orange.png-09da1888fee92d66ad078297ef66b09a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/tetromino-tiles-x24.png"
-dest_files=["res://.godot/imported/tetromino-tiles-x24.png-844a85b20dee71eeb0cd8d0e0a25e38c.ctex"]
+source_file="res://resources/images/tiles/tetromino-tiles-x24-orange.png"
+dest_files=["res://.godot/imported/tetromino-tiles-x24-orange.png-09da1888fee92d66ad078297ef66b09a.ctex"]
 
 [params]
 
