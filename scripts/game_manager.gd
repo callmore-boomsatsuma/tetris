@@ -243,13 +243,27 @@ func fall_row() -> bool:
 		return true
 	return false
 
+const connection_offsets := [
+	Vector2i.UP,
+	Vector2i.RIGHT,
+	Vector2i.DOWN,
+	Vector2i.LEFT,
+]
+
 func lock_piece() -> void:
 	controling_piece = false
 	piece_locked.emit(piece_position)
 	ghost_piece_locked.emit(piece_position)
-	for pos in get_active_piece_cells():
+	var cells := get_active_piece_cells()
+	for pos in cells:
+		var connections := CellData.Connection.NONE
+		for side in range(connection_offsets.size()):
+			if (pos + connection_offsets[ side]) in cells:
+				@warning_ignore("int_as_enum_without_cast")
+				connections |= 1 << side
+
 		var point := pos + piece_position
-		board.set_cell(point, CellData.new(active_piece.color))
+		board.set_cell(point, CellData.new(active_piece.color, connections))
 	
 	clear_lines()
 
