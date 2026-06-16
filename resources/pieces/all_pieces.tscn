@@ -58,46 +58,39 @@ offset_left = 757.0
 offset_top = 62.0
 offset_right = 853.0
 offset_bottom = 110.0
-displayed_piece = ExtResource("8_ivgqf")
 
 [node name="NextQueueEntry2" parent="." unique_id=1830335312 instance=ExtResource("10_ivgqf")]
 offset_left = 702.0
 offset_top = 178.0
 offset_right = 798.0
 offset_bottom = 226.0
-displayed_piece = ExtResource("5_kmtts")
 
 [node name="NextQueueEntry3" parent="." unique_id=1345960811 instance=ExtResource("10_ivgqf")]
 offset_left = 811.0
 offset_top = 179.0
 offset_right = 907.0
 offset_bottom = 227.0
-displayed_piece = ExtResource("6_4ln4q")
 
 [node name="NextQueueEntry4" parent="." unique_id=2002349218 instance=ExtResource("10_ivgqf")]
 offset_left = 813.0
 offset_top = 121.0
 offset_right = 909.0
 offset_bottom = 169.0
-displayed_piece = ExtResource("7_nqssg")
 
 [node name="NextQueueEntry5" parent="." unique_id=131364098 instance=ExtResource("10_ivgqf")]
 offset_left = 701.0
 offset_top = 237.0
 offset_right = 797.0
 offset_bottom = 285.0
-displayed_piece = ExtResource("3_joqeh")
 
 [node name="NextQueueEntry6" parent="." unique_id=1111153892 instance=ExtResource("10_ivgqf")]
 offset_left = 702.0
 offset_top = 120.0
 offset_right = 798.0
 offset_bottom = 168.0
-displayed_piece = ExtResource("2_joqeh")
 
 [node name="NextQueueEntry7" parent="." unique_id=409898345 instance=ExtResource("10_ivgqf")]
 offset_left = 812.0
 offset_top = 239.0
 offset_right = 908.0
 offset_bottom = 287.0
-displayed_piece = ExtResource("4_fbkkq")

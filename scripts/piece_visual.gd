@@ -24,4 +24,4 @@ func _draw() -> void:
 	if piece == null:
 		return
 	for i in range(piece.cells.size()):
-		draw_rect(Rect2(Vector2(piece.cells[i]) * cell_size - (cell_size / 2), cell_size), piece.color)
+		draw_rect(Rect2(Vector2(piece.cells[i]) * cell_size - (cell_size / 2), cell_size), GlobalColormap.get_color(piece.color))

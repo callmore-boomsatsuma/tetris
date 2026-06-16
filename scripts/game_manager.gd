@@ -260,8 +260,8 @@ func reset_fall_delay() -> void:
 	piece_fall_delay = get_fall_delay()
 
 func get_fall_delay() -> float:
-	# return 5.0
-	return 0.25
+	return 5.0
+	# return 0.25
 	# return 1 / 60.0
 	# return 0.0001
 

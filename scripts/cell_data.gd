@@ -1,12 +1,12 @@
 class_name CellData
 extends RefCounted
 
-var color := Color.BLUE
+var color := GlobalColormap.DEFAULT_COLOR
 @warning_ignore("int_as_enum_without_match")
 var connections: Connection = 0 as Connection
 
 @warning_ignore("int_as_enum_without_match")
-func _init(p_color := Color.BLUE, p_connections := 0 as Connection) -> void:
+func _init(p_color := GlobalColormap.DEFAULT_COLOR, p_connections := 0 as Connection) -> void:
     color = p_color
     connections = p_connections
 

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://nawetuxdkpuw"]
+[gd_scene format=3 uid="uid://nawetuxdkpuw"]
 
 [ext_resource type="Script" uid="uid://dj0dx4c2khyd5" path="res://scripts/board_visual.gd" id="1_1bvp3"]
 [ext_resource type="Resource" uid="uid://dou3usrrb6ray" path="res://resources/pieces/piece_t.tres" id="2_0xm2m"]
@@ -16,7 +16,6 @@
 [ext_resource type="Resource" uid="uid://d0wdld5al1iir" path="res://resources/pieces/piece_z.tres" id="12_cegan"]
 [ext_resource type="Script" uid="uid://bq2digypu3prn" path="res://scripts/resources/bag_randomiser.gd" id="13_82xsv"]
 [ext_resource type="PackedScene" uid="uid://bpqa1lyedoixq" path="res://scenes/next_queue/next_queue.tscn" id="14_w48qg"]
-[ext_resource type="TileSet" uid="uid://b32ugretshyb7" path="res://resources/images/tetromino-tiles-x24-tile-set.tres" id="16_2cqfq"]
 
 [sub_resource type="Gradient" id="Gradient_lquwl"]
 colors = PackedColorArray(0.76, 0.73263997, 0.55480003, 1, 0.67, 0.6162883, 0.4221, 1)
@@ -210,10 +209,6 @@ script = ExtResource("3_h2yge")
 script = ExtResource("5_lquwl")
 board = NodePath("../Board")
 piece_randomiser = SubResource("Resource_ycdy4")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=831217865]
-tile_map_data = PackedByteArray("AAAFAAsAAAABAAAAAAAFAAoAAAABAAEAAAAFAAkAAAACAAEAAAAGAAkAAAAAAAIAAAAIAAsAAAAAAAMAAAAHAAsAAAACAAEAAAAHAAwAAAADAAAAAAAIAAwAAAABAAIAAAAKAAoAAAACAAAAAAALAAoAAAAAAAMAAAALAAsAAAABAAEAAAALAAwAAAABAAAAAAAHAA4AAAAAAAIAAAAGAA4AAAACAAEAAAAGAA8AAAABAAIAAAAFAA8AAAACAAAAAAAJAA4AAAACAAAAAAAKAA4AAAAAAAMAAAAKAA8AAAADAAAAAAALAA8AAAAAAAIAAAAIABAAAAAAAAEAAAAIABEAAAADAAIAAAAHABEAAAACAAAAAAAJABEAAAAAAAIAAAAGABMAAAACAAAAAAAHABMAAAACAAIAAAAIABMAAAACAAIAAAAJABMAAAAAAAIAAAA=")
-tile_set = ExtResource("16_2cqfq")
 
 [connection signal="cell_changed" from="Board" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" method="_on_board_cell_changed"]
 [connection signal="cell_cleared" from="Board" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" method="_on_board_cell_cleared"]

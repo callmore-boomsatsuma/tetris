@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Colormap" format=3 uid="uid://dek5vxmd7do2k"]
+
+[ext_resource type="Script" uid="uid://bjvy6b5u8a6vx" path="res://scripts/resources/colormap.gd" id="1_hlgt6"]
+
+[resource]
+script = ExtResource("1_hlgt6")
+mapping = Dictionary[StringName, Color]({
+&"blue": Color(0, 0, 1, 1),
+&"cyan": Color(0, 1, 1, 1),
+&"gray": Color(0.74509805, 0.74509805, 0.74509805, 1),
+&"green": Color(0, 1, 0, 1),
+&"orange": Color(1, 0.64705884, 0, 1),
+&"purple": Color(0.627451, 0.1254902, 0.9411765, 1),
+&"red": Color(1, 0, 0, 1),
+&"yellow": Color(1, 1, 0, 1)
+})
+metadata/_custom_type_script = "uid://bjvy6b5u8a6vx"

@@ -31,10 +31,10 @@ const colors := {
 
 func draw_tile(location: Vector2i, data: CellData) -> void:
 	assert(sprite_frames != null)
-	draw_texture_rect(sprite_frames.get_frame_texture(colors[data.color], data.connections), Rect2(location, Vector2.ONE), false, data.color)
+	draw_texture_rect(sprite_frames.get_frame_texture(data.color, data.connections), Rect2(location, Vector2.ONE), false)
 
 func draw_tile_solid(location: Vector2i, data: CellData) -> void:
-	draw_rect(Rect2(location, Vector2.ONE), data.color)
+	draw_rect(Rect2(location, Vector2.ONE), GlobalColormap.get_color(data.color))
 
 
 func _on_board_cell_changed(loc: Vector2i, data: CellData) -> void:

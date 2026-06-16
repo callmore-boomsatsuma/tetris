@@ -6,7 +6,7 @@ extends Resource
     set(value):
         cells = value
         emit_changed()
-@export var color: Color:
+@export var color: StringName:
     set(value):
         color = value
         emit_changed()
@@ -23,7 +23,7 @@ extends Resource
 
 func _init(
     p_cells: Array[Vector2i] = [],
-    p_color: Color = Color.WHITE,
+    p_color: StringName = GlobalColormap.DEFAULT_COLOR,
     p_kick_table: KickTable = null,
     p_display_offset := Vector2.ZERO
 ) -> void:
@@ -46,3 +46,10 @@ func rotation_direction_rotate_left(rot: RotationDirection) -> RotationDirection
 
 func rotation_direction_rotate_right(rot: RotationDirection) -> RotationDirection:
     return posmod(rot + 1, RotationDirection.MAX) as RotationDirection
+
+func _validate_property(property: Dictionary) -> void:
+    match property.name:
+        "color":
+            property.hint = PROPERTY_HINT_ENUM_SUGGESTION
+            property.hint_string = ",".join(GlobalColormap.get_all_colors())
+            pass

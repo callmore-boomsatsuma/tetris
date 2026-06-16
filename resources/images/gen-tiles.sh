@@ -6,4 +6,5 @@ magick tetromino-tiles-x24.png -modulate 100,100,200 tiles/tetromino-tiles-x24-c
 magick tetromino-tiles-x24.png -modulate 100,100,30 tiles/tetromino-tiles-x24-blue.png
 magick tetromino-tiles-x24.png -modulate 100,100,50 tiles/tetromino-tiles-x24-purple.png
 magick tetromino-tiles-x24.png -modulate 100,100,116 tiles/tetromino-tiles-x24-orange.png
+magick tetromino-tiles-x24.png -modulate 100,0,100 tiles/tetromino-tiles-x24-gray.png
 cp tetromino-tiles-x24.png tiles/tetromino-tiles-x24-red.png
