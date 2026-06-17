@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bc8e1lhsrhneu" path="res://scripts/piece_icon_visual.gd" id="1_5dh30"]
 [ext_resource type="Script" uid="uid://jqwcm7pmo4ji" path="res://scenes/piece_display/piece_display.gd" id="1_r4qdi"]
 [ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="2_r4qdi"]
+[ext_resource type="SpriteFrames" uid="uid://bkk8m6yfbq4qy" path="res://resources/images/tetromino-tiles-x24-sprite-frames.tres" id="4_cjsck"]
 
 [node name="PieceDisplay" type="Panel" unique_id=847700633]
 custom_minimum_size = Vector2(96, 48)
@@ -24,4 +25,5 @@ grow_vertical = 2
 [node name="PieceVisual" type="Node2D" parent="Centerer" unique_id=1998173465]
 unique_name_in_owner = true
 script = ExtResource("1_5dh30")
+sprite_frames = ExtResource("4_cjsck")
 piece = ExtResource("2_r4qdi")

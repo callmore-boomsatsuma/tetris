@@ -48,6 +48,15 @@ signal ghost_piece_spawned(position: Vector2i, piece: PieceInfo)
 signal update_next_queue(next_queue: Array[PieceInfo])
 signal update_hold(held_piece: PieceInfo)
 
+signal row_cleared(row: int)
+signal lines_scored(lines: int, spin: SpinType, b2b: bool)
+
+enum SpinType {
+	None,
+	Mini,
+	Full,
+}
+
 func _ready():
 	spawn_piece()
 
@@ -273,8 +282,10 @@ func piece_entry_delay_timeout() -> void:
 func reset_fall_delay() -> void:
 	piece_fall_delay = get_fall_delay()
 
+var fall_delay := 0.0
 func get_fall_delay() -> float:
-	return 5.0
+	return fall_delay
+	# return 5.0
 	# return 0.25
 	# return 1 / 60.0
 	# return 0.0001
@@ -347,10 +358,14 @@ func set_piece_rotation(new_rotation: PieceInfo.RotationDirection) -> void:
 	piece_rotated.emit(piece_rotation, true)
 
 func clear_lines() -> void:
+	var lines_cleared := 0
 	for row in range(board.size.y):
 		if check_row(row):
 			board.clear_row(row)
 			board.fall_above_rows(row)
+			lines_cleared += 1
+		row_cleared.emit(row)
+	lines_scored.emit(lines_cleared, SpinType.None, false)
 
 func check_row(row: int) -> bool:
 	for x in range(board.size.x):
@@ -381,3 +396,7 @@ func get_next_piece() -> PieceInfo:
 	var next_piece := piece_randomiser.get_next_piece()
 	update_next_queue.emit(piece_randomiser.get_piece_queue(6))
 	return next_piece
+
+func _on_player_level_changed(level: int) -> void:
+	fall_delay = 5.0 / level
+

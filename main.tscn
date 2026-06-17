@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://d0wdld5al1iir" path="res://resources/pieces/piece_z.tres" id="12_cegan"]
 [ext_resource type="Script" uid="uid://bq2digypu3prn" path="res://scripts/resources/bag_randomiser.gd" id="13_82xsv"]
 [ext_resource type="PackedScene" uid="uid://bpqa1lyedoixq" path="res://scenes/next_queue/next_queue.tscn" id="14_w48qg"]
+[ext_resource type="Script" uid="uid://prnx2yfhy401" path="res://scripts/player_status.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_lquwl"]
 colors = PackedColorArray(0.76, 0.73263997, 0.55480003, 1, 0.67, 0.6162883, 0.4221, 1)
@@ -64,15 +65,20 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -224.0
-offset_top = -244.0
+offset_top = -280.0
 offset_right = 224.0
-offset_bottom = 244.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer" unique_id=2072819409]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
 
 [node name="GameHUD" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=149103624]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 alignment = 1
 
 [node name="Hold" parent="CanvasLayer/VBoxContainer/GameHUD" unique_id=145509640 instance=ExtResource("2_vivmo")]
@@ -112,6 +118,7 @@ metadata/_edit_group_ = true
 [node name="GhostPieceVisual" type="Node2D" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" unique_id=1738967395]
 modulate = Color(0.88044363, 0.88044363, 0.88044363, 0.5411765)
 script = ExtResource("2_lquwl")
+sprite_frames = ExtResource("4_yaehf")
 cell_size = Vector2(24, 24)
 
 [node name="PieceVisual" type="Node2D" parent="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" unique_id=630286922]
@@ -210,15 +217,20 @@ script = ExtResource("5_lquwl")
 board = NodePath("../Board")
 piece_randomiser = SubResource("Resource_ycdy4")
 
+[node name="PlayerStatus" type="Node" parent="." unique_id=548103322]
+script = ExtResource("17_yaehf")
+
 [connection signal="cell_changed" from="Board" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" method="_on_board_cell_changed"]
 [connection signal="cell_cleared" from="Board" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual" method="_on_board_cell_cleared"]
 [connection signal="ghost_piece_locked" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_locked"]
 [connection signal="ghost_piece_moved" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_moved"]
 [connection signal="ghost_piece_rotated" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_rotated"]
 [connection signal="ghost_piece_spawned" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/GhostPieceVisual" method="_on_piece_spawned"]
+[connection signal="lines_scored" from="GameManager" to="PlayerStatus" method="_on_lines_scored"]
 [connection signal="piece_locked" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_locked"]
 [connection signal="piece_moved" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_moved"]
 [connection signal="piece_rotated" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_rotated"]
 [connection signal="piece_spawned" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_spawned"]
 [connection signal="update_hold" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Hold" method="_on_hold_updated"]
 [connection signal="update_next_queue" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/NextQueue" method="_on_update_next_queue"]
+[connection signal="level_changed" from="PlayerStatus" to="GameManager" method="_on_player_level_changed"]
