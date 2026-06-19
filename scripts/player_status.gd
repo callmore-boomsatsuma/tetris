@@ -6,22 +6,33 @@ extends Node
 @export var lines: int = 0
 
 var pieces_placed: int = 0
+var b2b: int = 0
 
 signal score_changed(score: int)
 signal level_changed(level: int)
 signal lines_changed(lines: int)
 signal pieces_placed_changed(pieces: int)
 
-func _on_lines_scored(p_lines: int, _spin: GameManager.SpinType, _b2b: bool) -> void:
+func _on_lines_scored(p_lines: int, spin: GameManager.SpinType) -> void:
 	add_lines(p_lines)
+	var score_add := 0
 	if p_lines > 4:
-		add_score(200 * p_lines)
+		score_add = 2 * p_lines
 	else:
 		match p_lines:
-			4: add_score(800)
-			3: add_score(500)
-			2: add_score(300)
-			1: add_score(100)
+			4: score_add = 8
+			3: score_add = 5
+			2: score_add = 3
+			1: score_add = 1
+	if p_lines >= 4 or spin != GameManager.SpinType.None:
+		b2b += 1
+	else:
+		b2b = 0
+	
+	if b2b > 1:
+		score_add = floori(score_add * 1.5)
+		
+	add_score(score_add)
 
 func _on_piece_placed(piece: PieceInfo) -> void:
 	add_pieces_placed(piece)

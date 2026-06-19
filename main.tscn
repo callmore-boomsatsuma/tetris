@@ -8,6 +8,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bkk8m6yfbq4qy" path="res://resources/images/tetromino-tiles-x24-sprite-frames.tres" id="4_yaehf"]
 [ext_resource type="Script" uid="uid://dgl84wruclng6" path="res://scripts/game_manager.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://fbd1oiqb662y" path="res://scripts/resources/piece_info.gd" id="6_ycdy4"]
+[ext_resource type="Script" uid="uid://cap4usmt8ul3f" path="res://scripts/counter.gd" id="7_074og"]
 [ext_resource type="Resource" uid="uid://bh0jrjlvq1mvw" path="res://resources/pieces/piece_i.tres" id="7_w48qg"]
 [ext_resource type="Resource" uid="uid://7n4hpa1xb2o3" path="res://resources/pieces/piece_j.tres" id="8_vivmo"]
 [ext_resource type="Resource" uid="uid://b35ang77qnwmd" path="res://resources/pieces/piece_l.tres" id="9_2cqfq"]
@@ -140,6 +141,7 @@ theme_override_constants/separation = 0
 [node name="Lines" type="CenterContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=645577479]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+script = ExtResource("7_074og")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Lines" unique_id=180182029]
 layout_mode = 2
@@ -164,6 +166,7 @@ vertical_alignment = 1
 [node name="Score" type="CenterContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=546079430]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
+script = ExtResource("7_074og")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Score" unique_id=1149130464]
 layout_mode = 2
@@ -188,6 +191,7 @@ vertical_alignment = 1
 [node name="Level" type="CenterContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=1124413333]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+script = ExtResource("7_074og")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Level" unique_id=1190960021]
 layout_mode = 2
@@ -233,4 +237,7 @@ script = ExtResource("17_yaehf")
 [connection signal="piece_spawned" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Board/ContainerOutside/ContainerInside/PanelInside/BoardVisual/PieceVisual" method="_on_piece_spawned"]
 [connection signal="update_hold" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/Hold" method="_on_hold_updated"]
 [connection signal="update_next_queue" from="GameManager" to="CanvasLayer/VBoxContainer/GameHUD/NextQueue" method="_on_update_next_queue"]
+[connection signal="level_changed" from="PlayerStatus" to="CanvasLayer/VBoxContainer/HBoxContainer/Level" method="_update_counter"]
 [connection signal="level_changed" from="PlayerStatus" to="GameManager" method="_on_player_level_changed"]
+[connection signal="lines_changed" from="PlayerStatus" to="CanvasLayer/VBoxContainer/HBoxContainer/Lines" method="_update_counter"]
+[connection signal="score_changed" from="PlayerStatus" to="CanvasLayer/VBoxContainer/HBoxContainer/Score" method="_update_counter"]

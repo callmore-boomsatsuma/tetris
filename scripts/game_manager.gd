@@ -49,7 +49,7 @@ signal update_next_queue(next_queue: Array[PieceInfo])
 signal update_hold(held_piece: PieceInfo)
 
 signal row_cleared(row: int)
-signal lines_scored(lines: int, spin: SpinType, b2b: bool)
+signal lines_scored(lines: int, spin: SpinType)
 
 enum SpinType {
 	None,
@@ -365,7 +365,8 @@ func clear_lines() -> void:
 			board.fall_above_rows(row)
 			lines_cleared += 1
 		row_cleared.emit(row)
-	lines_scored.emit(lines_cleared, SpinType.None, false)
+	if lines_cleared > 0:
+		lines_scored.emit(lines_cleared, SpinType.None)
 
 func check_row(row: int) -> bool:
 	for x in range(board.size.x):
